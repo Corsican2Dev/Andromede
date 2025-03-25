@@ -1,0 +1,259 @@
+/* ====================== */
+/* RESPONSIVE FLIPBOOK    */
+/* ====================== */
+
+/* Styles pour les écrans de tablette et mobile */
+@media (max-width: 1199px) {
+    body {
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 100vw;
+        margin: 0;
+        padding: 0;
+    }
+    
+    /* Masquer les éléments non nécessaires en mode responsive */
+    #backgroundSelector, 
+    #synopsisButton,
+    .progress-toggle-btn,
+    #explanation {
+        display: none !important;
+    }
+    
+    /* Seul le hamburger menu reste visible */
+    .hamburger-menu {
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        z-index: 2000;
+    }
+    
+    /* Ajuster le flipbook pour qu'il prenne tout l'écran */
+    .book {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        max-width: 100%;
+        transform: none;
+        translate: none;
+        rotate: none;
+        bottom: 0;
+        left: 0;
+        margin: 0;
+        padding: 0;
+    }
+    
+    /* Désactiver la perspective 3D pour simplifier la vue */
+    .book.flipbook-3d,
+    .book.flipbook-top {
+        transform: none !important;
+        perspective: none;
+    }
+    
+    /* Ajuster les pages pour l'affichage plein écran */
+    .page {
+        width: 100vw;
+        height: 100vh;
+        border: none;
+    }
+    
+    .front, .back {
+        width: 100vw;
+        height: 100vh;
+    }
+    
+    .front video, .back video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    /* Navigation visible en mode responsive */
+    .mobile-nav-controls {
+        position: fixed;
+        bottom: 4rem; /* Ajusté pour laisser de l'espace pour la barre de progression */
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        z-index: 2000;
+    }
+    
+    .mobile-nav-btn {
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        border: 2px solid rgba(255, 255, 255, 0.5);
+        border-radius: 50%;
+        width: 3.5rem;
+        height: 3.5rem;
+        font-size: 1.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+    
+    .mobile-nav-btn:hover {
+        background-color: rgba(0, 0, 0, 0.9);
+        transform: scale(1.1);
+    }
+    
+    .mobile-nav-btn:active {
+        transform: scale(0.95);
+    }
+    
+    /* Styles pour les différentes faces en mode responsive */
+    .responsive-mode .back {
+        display: none;
+    }
+    
+    .responsive-mode.showing-back .front {
+        display: none;
+    }
+    
+    .responsive-mode.showing-back .back {
+        display: block;
+        translate: 0;
+        rotate: none;
+    }
+    
+    /* Amélioration des textes pour lisibilité sur mobile */
+    .overlay-text {
+        font-size: 1rem;
+        top: 7rem;
+        padding: 1.5rem;
+        overflow-y: auto;
+        max-height: calc(100vh - 10rem);
+    }
+    
+    .overlay-title {
+        font-size: 1.2rem;
+        top: 2rem;
+    }
+    
+    /* Contrôles de musique et narration adaptés */
+    .music-button {
+        bottom: 5rem !important;
+        right: 1rem !important;
+        left: auto !important;
+        font-size: 1.5rem !important;
+        padding: 0.5rem 1rem !important;
+        background-color: rgba(0, 0, 0, 0.5) !important;
+    }
+    
+    /* Indicateur de page mobile */
+    .mobile-page-indicator {
+        position: fixed;
+        top: 1rem;
+        left: 1rem;
+        background-color: rgba(0, 0, 0, 0.6);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 1rem;
+        font-size: 0.9rem;
+        z-index: 1500;
+    }
+    
+    /* Animation de swipe pour guider l'utilisateur */
+    .swipe-hint {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100px;
+        height: 100px;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: pulse 2s infinite;
+        z-index: 1000;
+        pointer-events: none;
+    }
+    
+    @keyframes pulse {
+        0% {
+            transform: translate(-50%, -50%) scale(0.5);
+            opacity: 0;
+        }
+        50% {
+            opacity: 0.5;
+        }
+        100% {
+            transform: translate(-50%, -50%) scale(1.5);
+            opacity: 0;
+        }
+    }
+    
+    /* Indicateur de swipe */
+    .swipe-arrow {
+        font-size: 2rem;
+        color: white;
+        animation: moveLeftRight 1.5s infinite;
+    }
+    
+    @keyframes moveLeftRight {
+        0%, 100% {
+            transform: translateX(-15px);
+        }
+        50% {
+            transform: translateX(15px);
+        }
+    }
+}
+
+/* Ajustements spécifiques pour les téléphones */
+@media (max-width: 767px) {
+    .overlay-text {
+        font-size: 0.9rem;
+        top: 6rem;
+        padding: 1rem;
+    }
+    
+    .overlay-title {
+        font-size: 1rem;
+        top: 1.5rem;
+    }
+    
+    .mobile-nav-btn {
+        width: 3rem;
+        height: 3rem;
+        font-size: 1.2rem;
+        opacity: 0.9;
+    }
+    
+    .mobile-nav-controls {
+        bottom: 4rem; /* Ajusté pour laisser de l'espace pour la barre de progression */
+        gap: 1.5rem;
+    }
+    
+    /* Réduire la taille des boutons de contrôle sur très petits écrans */
+    .book-control-btn {
+        width: 2rem !important;
+        height: 2rem !important;
+        font-size: 0.9rem !important;
+    }
+}
+
+/* Animation pour rendre les boutons plus visibles au début */
+@keyframes buttonPulse {
+    0% { transform: scale(1); opacity: 0.7; }
+    50% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.7; }
+}
+
+.mobile-nav-btn {
+    animation: buttonPulse 2s infinite;
+}
+
+.mobile-nav-btn:hover {
+    animation: none;
+}

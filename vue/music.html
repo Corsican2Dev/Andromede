@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musique</title>
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="shortcut icon" href="#!" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../styles/music.css">
+</head>
+<body>
+    <video id="backgroundVideo" class="background-video" autoplay loading="lazy">
+        <source src="../assets/video/Gallerie/Bg_Gallerie_Music.mp4" type="video/mp4">
+        Votre navigateur ne supporte pas la balise vidéo.
+    </video>
+
+    <!-- Hamburger Menu -->
+    <div class="hamburger-menu ms-auto" id="main-hamburger">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="hamburgerMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+            ☰
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="hamburgerMenuButton">
+            <li><button id="galleryButton" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#galleryModal">Gallerie</button></li>
+        </ul>
+    </div>
+    
+    <!-- Gallery Modal -->
+    <div class="modal fade" id="galleryModal" tabindex="-1" aria-labelledby="galleryModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content dark-modal">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="galleryModalLabel">Galerie</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <button class="btn btn-primary w-100 mb-2" onclick="location.href='./photoGallery.html'">Photo</button>
+                    <button class="btn btn-primary w-100 mb-2" onclick="location.href='./music.html'">Musique</button>
+                    <button class="btn btn-primary w-100 mb-2" onclick="location.href='./referencing.html'">Référencement</button>
+                    <button class="btn btn-primary w-100 mb-2" onclick="location.href='./lexique.html'">Lexique</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-wrapper">
+        <div id="content" class="container content">
+            <button class="close-button" onclick="location.href='../index.html'">X</button>
+            <div id="musicGallery" class="row justify-content-center">
+                <div class="col-12 text-center mb-4">
+                    <h1>Musique</h1>
+                </div>
+                <div class="col-12 mb-3">
+                    <div class="audio-player">
+                        <audio id="audioPlayer" controls>
+                            <source id="audioSource" src="../assets/audio/Gallerie/track1.mp3" type="audio/mpeg">
+                            Votre navigateur ne supporte pas la balise audio.
+                        </audio>
+                    </div>
+                </div>
+                <div class="playlist-container col-12">
+                    <div class="row justify-content-center">
+                        <div class="col-md-6 mb-3 playlist-item" data-src="../assets/audio/Gallerie/musique demo.mp3">
+                            <i class="bi bi-music-note"></i><span class="translatable">Track 1</span>
+                        </div>
+                        <div class="col-md-6 mb-3 playlist-item" data-src="../assets/audio/Gallerie/musique demo 2.mp3">
+                            <i class="bi bi-music-note"></i><span class="translatable">Track 2</span>
+                        </div>
+                        <div class="col-md-6 mb-3 playlist-item" data-src="../assets/audio/Gallerie/p3_4.mp3">
+                            <i class="bi bi-music-note"></i><span class="translatable">Track 3</span>
+                        </div>
+                        <div class="col-md-6 mb-3 playlist-item" data-src="../assets/audio/Gallerie/p5.mp3">
+                            <i class="bi bi-music-note"></i><span>Track 4</span>
+                        </div>
+                        <div class="col-md-6 mb-3 playlist-item" data-src="../assets/audio/Gallerie/p6.mp3">
+                            <i class="bi bi-music-note"></i><span>Track 5</span>
+                        </div>
+                        <div class="col-md-6 mb-3 playlist-item" data-src="../assets/audio/Gallerie/p7.mp3">
+                            <i class="bi bi-music-note"></i><span>Track 6</span>
+                        </div>
+                        <div class="col-md-6 mb-3 playlist-item" data-src="../assets/audio/Gallerie/p8.mp3">
+                            <i class="bi bi-music-note"></i><span>Track 7</span>
+                        </div>
+                        <div class="col-md-6 mb-3 playlist-item" data-src="../assets/audio/Gallerie/p9.mp3">
+                            <i class="bi bi-music-note"></i><span>Track 8</span>
+                        </div>
+                        <div class="col-md-6 mb-3 playlist-item" data-src="../assets/audio/Gallerie/p10.mp3">
+                            <i class="bi bi-music-note"></i><span>Track 9</span>
+                        </div>
+                        <div class="col-md-6 mb-3 playlist-item" data-src="../assets/audio/Gallerie/p11.mp3">
+                            <i class="bi bi-music-note"></i><span>Track 10</span>
+                        </div>
+                        <div class="col-md-6 mb-3 playlist-item" data-src="../assets/audio/Gallerie/p12.mp3">
+                            <i class="bi bi-music-note"></i><span>Track 11</span>
+                        </div>
+                        <div class="col-md-6 mb-3 playlist-item" data-src="../assets/audio/Gallerie/p13.mp3">
+                            <i class="bi bi-music-note"></i><span>Track 12</span>
+                        </div>
+                        <div class="col-md-6 mb-3 playlist-item" data-src="../assets/audio/Gallerie/p14.mp3">
+                            <i class="bi bi-music-note"></i><span>Track 13</span>
+                        </div>
+                        <div class="col-md-6 mb-3 playlist-item" data-src="../assets/audio/Gallerie/p15.mp3">
+                            <i class="bi bi-music-note"></i><span>Track 14</span>
+                        </div>
+                        <div class="col-md-6 mb-3 playlist-item" data-src="../assets/audio/Gallerie/p16.mp3">
+                            <i class="bi bi-music-note"></i><span>Track 15</span>
+                        </div>
+                        <div class="col-md-6 mb-3 playlist-item" data-src="../assets/audio/Gallerie/page d_accueil.mp3">
+                            <i class="bi bi-music-note"></i><span>Track 16</span>
+                        </div>
+                        <!-- ...more tracks if available... -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../script/music.js"></script>
+    <script src="../script/optimizations.js"></script>
+    <script src="../script/modal-fix.js"></script>
+    <script src="../script/translator.js"></script>
+</body>
+</html>

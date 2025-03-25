@@ -1,0 +1,233 @@
+.book-progress-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    transition: transform 0.3s ease-in-out;
+}
+
+.book-progress-container.hidden {
+    transform: translateY(100%);
+}
+
+.book-progress-bar-container {
+    flex: 1 1 100%;
+    height: 0.3125rem;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 0.3125rem;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+}
+
+.book-progress-bar {
+    height: 100%;
+    background-color: #007bff;
+    border-radius: 0.3125rem;
+    transition: width 0.3s ease;
+}
+
+.book-progress-text {
+    color: #fff;
+    font-size: 0.75rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    flex: 1 1 100%;
+}
+
+.book-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1 1 100%;
+}
+
+.book-control-btn {
+    background-color: transparent;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0.3125rem;
+    padding: 0.3125rem 0.625rem;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.book-control-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.book-control-btn.active {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.progress-toggle-btn {
+    position: fixed;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.5rem;
+    background-color: rgba(0, 0, 0, 0.6);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 999;
+    display: none;
+    transition: all 0.3s ease;
+}
+
+.progress-toggle-btn.visible {
+    display: block;
+}
+
+.progress-toggle-btn:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Conteneur de contrôle du volume - pour le tooltip */
+.volume-control-container {
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 0.5rem;
+    min-width: 12.5rem;
+}
+
+.volume-control-container .form-range {
+    width: 100%;
+}
+
+.volume-label {
+    color: white;
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+/* Adaptation mobile */
+@media (max-width: 768px) {
+    .book-controls {
+        flex-wrap: wrap;
+    }
+    
+    .book-control-btn {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.75rem;
+    }
+    
+    .book-progress-text {
+        font-size: 0.625rem;
+    }
+}
+
+/* Style adapté pour la version responsive */
+@media (max-width: 1199px) {
+    .book-progress-container {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 0.25rem 0.5rem;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        z-index: 2000;
+        transform: none;
+        transition: transform 0.3s ease-in-out;
+    }
+    
+    .book-progress-container.hidden {
+        transform: translateY(100%);
+    }
+    
+    .book-progress-bar-container {
+        display: none; /* Masquer la barre de progression pour gagner de l'espace */
+    }
+    
+    .book-progress-text {
+        display: none; /* Masquer le texte pour gagner de l'espace */
+    }
+    
+    .book-controls {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.25rem 0;
+    }
+    
+    .book-control-btn {
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        width: 2.5rem;
+        height: 2.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1rem;
+        padding: 0;
+    }
+    
+    .book-control-btn.active {
+        background-color: rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.5);
+    }
+    
+    /* Masquer certains boutons moins essentiels en mode mobile */
+    .mobile-hidden {
+        display: none !important;
+    }
+    
+    /* Ajuster la position des contrôles de navigation mobile pour éviter le chevauchement */
+    .mobile-nav-controls {
+        bottom: 4rem; /* Laisser de l'espace pour la barre de progression */
+        transition: bottom 0.3s ease-in-out;
+    }
+    
+    /* Ajuster les contrôles de navigation quand la barre de progression est cachée */
+    .progress-hidden .mobile-nav-controls {
+        bottom: 1.5rem;
+    }
+    
+    /* Style pour le bouton toggle en responsive */
+    .progress-toggle-btn {
+        position: fixed;
+        bottom: 1rem;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 0.5rem;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        width: 2.5rem;
+        height: 2.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1rem;
+        cursor: pointer;
+        z-index: 2000;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    
+    /* Afficher le bouton toggle seulement quand la barre est cachée en responsive */
+    .progress-hidden .progress-toggle-btn {
+        opacity: 1;
+        visibility: visible;
+    }
+}

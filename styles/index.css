@@ -1,0 +1,624 @@
+/* ====================== */
+/* RESET & BASE STYLES    */
+/* ====================== */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    perspective: 1000px;
+    font: 1rem/1.4 sans-serif;
+    overflow: hidden;
+    background-color: #000000;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.bg-black {
+    background-color: #000000;
+}
+
+/* ====================== */
+/* CONTROLS & NAVIGATION  */
+/* ====================== */
+#backgroundSelector {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 1000;
+}
+
+#backgroundSelect {
+    padding: 0.625rem;
+    background-color: #ffffff;
+    border: none;
+    cursor: pointer;
+}
+
+#muteButton {
+    margin-left: 0.625rem;
+    padding: 0.625rem;
+    background-color: #ffffff;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.volume-slider {
+    margin-left: 0.625rem;
+    width: 9.375rem;
+    height: 0.3125rem;
+    background: #ddd;
+    border-radius: 0.3125rem;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 0.9375rem;
+    height: 0.9375rem;
+    background: #ddd;
+    border-radius: 50%;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.volume-slider::-moz-range-thumb {
+    width: 0.9375rem;
+    height: 0.9375rem;
+    background: #007bff;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* ====================== */
+/* BUTTONS               */
+/* ====================== */
+.btn {
+    padding: 0.625rem 1.25rem;
+    font-size: 1rem;
+    border-radius: 0.3125rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #ddd;
+    color: #000;
+}
+
+#synopsisButton {
+    background-color: #ddd;
+    border: none;
+    color: black;
+    padding: 0.625rem 1.25rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1rem;
+    margin: 0.25rem 0.125rem;
+    cursor: pointer;
+    border-radius: 0.3125rem;
+    transition: background-color 0.3s ease;
+}
+
+#synopsisButton:hover {
+    background-color: #fff;
+}
+
+/* Styles pour les boutons hamburger */
+#dropdownMenuButtonLeft,
+#hamburgerButtonRight {
+    background-color: transparent;
+    color: #ddd;
+    border: none;
+    padding: 0.625rem 1.25rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 0.3125rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#dropdownMenuButtonLeft:hover,
+#hamburgerButtonRight:hover {
+    background-color: rgba(221, 221, 221, 0.2);
+    color: #000000;
+}
+
+/* ====================== */
+/* MODAL STYLES          */
+/* ====================== */
+.dark-modal {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 0.3125rem;
+}
+
+.dark-modal .modal-header {
+    background-color: #000000;
+    color: #ddd;
+    border-bottom: 1px solid #444;
+}
+
+.dark-modal .modal-body {
+    background-color: #333;
+}
+
+.dark-modal .btn-close {
+    color: #fff;
+    filter: invert(1);
+}
+
+.dark-modal .btn {
+    margin-bottom: 0.5rem;
+}
+
+.transparent-header {
+    background-color: transparent !important;
+    border-bottom: none !important;
+}
+
+/* Style pour le modal Synopsis */
+#synopsisModal .modal-content {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+#synopsisModal .modal-dialog {
+    max-width: 50%;
+    margin: auto;
+}
+
+#synopsisVideo {
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.7);
+    width: 100%;
+    height: auto;
+}
+
+/* Ajouter un bouton close au modal transparent */
+#synopsisModal .modal-header {
+    border: none;
+    padding: 0;
+    position: absolute;
+    top: -40px;
+    right: 0;
+    z-index: 10;
+}
+
+#synopsisModal .btn-close {
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    opacity: 0.8;
+}
+
+#synopsisModal .btn-close:hover {
+    opacity: 1;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+/* Adaptation mobile */
+@media (max-width: 992px) {
+    #synopsisModal .modal-dialog {
+        max-width: 90%;
+    }
+}
+
+/* ====================== */
+/* HAMBURGER MENU        */
+/* ====================== */
+.hamburger-menu {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1000;
+}
+
+.hamburger-menu .dropdown-menu {
+    background-color: #333;
+    border: none;
+    border-radius: 0.3125rem;
+}
+
+.hamburger-menu .dropdown-item {
+    color: #ddd;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.hamburger-menu .dropdown-item:hover {
+    background-color: rgba(221, 221, 221, 0.2);
+    color: #000;
+}
+
+.dropdown {
+    z-index: 1000;
+}
+
+/* ====================== */
+/* FLIPBOOK & PAGES      */
+/* ====================== */
+.book {
+    position: fixed;
+    bottom: 1.25rem;
+    transform: translateX(-50%);
+    display: flex;
+    width: 18.75rem;
+    pointer-events: none;
+    transform-style: preserve-3d;
+    transition: transform 1s, translate 1s, rotate 1s ease-in-out;
+    translate: calc(min(var(--c), 1) * 50%) 0%;
+    rotate: 1 0 0 30deg;
+}
+
+.flipbook-top {
+    transform: perspective(1000px) rotateX(0deg);
+    transition: transform 0.5s;
+}
+
+.flipbook-3d {
+    transform: perspective(1000px) rotateX(30deg);
+    transition: transform 0.5s;
+}
+
+.book-zoomed {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1.8);
+    transition: transform 0.5s ease-in-out;
+    z-index: 1000;
+}
+
+.book-zoomed.flipbook-top {
+    transform: translate(-50%, -50%) scale(1.8) rotateX(0deg);
+}
+
+.book-zoomed.flipbook-3d {
+    transform: translate(-50%, -50%) scale(1.8) rotateX(30deg);
+}
+
+.page {
+    --z: 0.125rem;
+    flex: none;
+    display: flex;
+    width: 100%;
+    pointer-events: all;
+    user-select: none;
+    transform-style: preserve-3d;
+    border-bottom: 0.125rem solid #fff;
+    transform-origin: left center;
+    transition: transform 1s, rotate 1s ease-in-out;
+    translate: calc(var(--i) * -100%) 0px 0px;
+    transform: translateZ(calc((var(--c) - var(--i) - 0.5) * var(--z)));
+    rotate: 0 1 0 calc(clamp(0, var(--c) - var(--i), 1) * -180deg);
+}
+
+.front,
+.back {
+    flex: none;
+    width: 100%;
+    backface-visibility: hidden;
+    background-color: #0008 !important;
+    translate: 0px;
+    transition: background-color 0.5s ease-in-out;
+}
+
+.front, video {
+    padding: 0; 
+}
+
+.back, video {
+    padding: 0;
+}
+
+.back {
+    translate: -100% 0;
+    rotate: 0 1 0 180deg;
+}
+
+.page img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease-in-out;
+}
+
+.page-number {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    font-size: 1rem;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    z-index: 10;
+}
+
+/* ====================== */
+/* VIDEO ELEMENTS        */
+/* ====================== */
+.front-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease-in-out;
+}
+
+video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    background-color: #0008;
+    border-radius: 0.3125rem;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
+    transition: transform 0.5s ease-in-out;
+}
+
+/* ====================== */
+/* TEXT OVERLAYS         */
+/* ====================== */
+.embed-responsive {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.overlay-title {
+    position: absolute;
+    top: 1.25rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 1rem;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 0.625rem;
+    width: 90%;
+    box-sizing: border-box;
+    z-index: 1;
+}
+
+.overlay-logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.18);
+    box-sizing: border-box;
+    z-index: 2;
+    overflow: hidden;
+    perspective: 800px;
+    transform-style: preserve-3d;
+}
+
+.overlay-logo img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    padding: 20px;
+    transform-style: preserve-3d;
+}
+
+.overlay-text {
+    position: absolute;
+    top: 8.75rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: calc(100% - 8.75rem);
+    color: white;
+    font-size: 0.8rem;
+    text-align: justify;
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 1.25rem 0.625rem;
+    box-sizing: border-box;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+    cursor: grab;
+}
+
+.full_bg_text {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.overlay-text:hover {
+    cursor: grabbing;
+}
+
+.overlay-text:active {
+    cursor: grabbing;
+}
+
+.overlay-text::-webkit-scrollbar {
+    width: 0.5rem;
+}
+
+.overlay-text::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 0.625rem;
+}
+
+.overlay-text::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* ====================== */
+/* UI ELEMENTS           */
+/* ====================== */
+#explanation {
+    position: absolute;
+    bottom: 0;
+    right: 1rem;
+    display: none;
+    width: 20%;
+    max-width: 28.125rem;
+    height: auto;
+    cursor: pointer;
+}
+
+.circle-number {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    border: 0.0625rem solid white;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 1.2rem;
+    margin: 0 auto 0.625rem auto;
+}
+
+/* ====================== */
+/* LANGUAGE SELECTION    */
+/* ====================== */
+.language-btn {
+    font-size: 1.1rem;
+    padding: 0.75rem;
+    border-radius: 0.3125rem;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.language-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+.language-btn.active {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.translation-progress {
+    padding: 1rem 0;
+    text-align: center;
+}
+
+.translation-progress .progress {
+    height: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+}
+
+.translation-progress .progress-bar {
+    background-color: #007bff;
+    border-radius: 1rem;
+}
+
+/* Animation de chargement pour les textes en cours de traduction */
+@keyframes translating {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
+}
+
+.translating {
+    animation: translating 1.5s infinite ease-in-out;
+}
+
+/* ====================== */
+/* STAR WARS ANIMATION   */
+/* ====================== */
+@keyframes starWarsLogo {
+    0% {
+        transform: perspective(800px) scale(0.1) translateY(200px) translateZ(-1000px);
+        opacity: 0;
+    }
+    20% {
+        opacity: 0.3;
+    }
+    50% {
+        transform: perspective(800px) scale(1) translateY(0) translateZ(0);
+        opacity: 1;
+    }
+    75% {
+        transform: perspective(800px) scale(1) translateY(0) translateZ(0);
+        opacity: 1;
+    }
+    100% {
+        transform: perspective(800px) scale(0.1) translateY(200px) translateZ(-1000px);
+        opacity: 0;
+    }
+}
+
+.star-wars-animation {
+    animation: starWarsLogo 8s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+    transform-style: preserve-3d;
+    transform-origin: center center;
+    will-change: transform, opacity;
+}
+
+/* ====================== */
+/* RESPONSIVE DESIGN     */
+/* ====================== */
+@media (max-width: 768px) {
+    #explanation {
+        width: 30%;
+        max-width: 9.375rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #explanation {
+        width: 40%;
+        max-width: 6.25rem;
+    }
+}
+
+/* Styles supplémentaires pour le mode responsive */
+@media (max-width: 1199px) {
+    body {
+        padding: 0;
+        margin: 0;
+        overflow: hidden;
+    }
+    
+    .book {
+        pointer-events: all;
+    }
+    
+    /* Ajuster la taille des textes pour meilleure lisibilité sur petit écran */
+    .overlay-text {
+        padding: 1rem;
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+}
+
+/* ====================== */
+/* NARRATION MODE        */
+/* ====================== */
+.narration-active .overlay-text {
+    opacity: 0 !important;
+    transition: opacity 0.5s ease-in-out;
+}
+
+
+/* Garder les boutons de musique visibles même pendant la narration */
+.narration-active .music-button {
+    opacity: 0.3 !important;
+    pointer-events: auto;
+}
