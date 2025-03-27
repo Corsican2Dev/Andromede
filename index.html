@@ -71,6 +71,9 @@
                 <button id="narration-btn" class="book-control-btn" title="Lecture automatique">
                     <i class="bi bi-person-fill"></i>
                 </button>
+                <button id="map-btn" class="book-control-btn" title="Afficher la carte galactique" data-bs-toggle="modal" data-bs-target="#videoModal">
+                    <i class="bi bi-map"></i>
+                </button>
                 <button id="close-progress-btn" class="book-control-btn" title="Masquer" onclick="bookProgress.hideProgress()">
                     <i class="bi bi-x-lg"></i>
                 </button>
@@ -157,10 +160,6 @@
         <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content dark-modal">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="synopsisModalLabel">Carte galactique</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
                     <div class="modal-body p-0">
                         <video id="hamburgerVideo" class="w-100" autoplay loop muted playsinline loading="lazy">
                             <source src="assets/video/map.mp4" type="video/mp4">
