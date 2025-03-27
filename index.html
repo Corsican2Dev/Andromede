@@ -156,15 +156,32 @@
             </div>
         </div>
 
-        <!-- Video Modal for Hamburger Button Right #cover_front .back -->
+        <!-- Video Modal for map galactic -->
         <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content dark-modal">
                     <div class="modal-body p-0">
-                        <video id="hamburgerVideo" class="w-100" autoplay loop muted playsinline loading="lazy">
-                            <source src="assets/video/map.mp4" type="video/mp4">
-                            Votre navigateur ne supporte pas la balise vidéo.
-                        </video>
+                        <div class="position-relative"></div>
+                            <video id="hamburgerVideo" class="w-100" autoplay loop muted playsinline loading="lazy">
+                                <source src="assets/video/map.mp4" type="video/mp4">
+                                Votre navigateur ne supporte pas la balise vidéo.
+                            </video>
+                            <button id="fullscreenButton" class="btn btn-light position-absolute top-0 end-0 m-2" onclick="toggleFullscreen('hamburgerVideo')" title="Plein écran">
+                                <i class="bi bi-arrows-fullscreen"></i>
+                            </button>
+                        </div>
+                        <script>
+                            function toggleFullscreen(videoId) {
+                                const videoElement = document.getElementById(videoId);
+                                if (videoElement.requestFullscreen) {
+                                    videoElement.requestFullscreen();
+                                } else if (videoElement.webkitRequestFullscreen) { // Safari
+                                    videoElement.webkitRequestFullscreen();
+                                } else if (videoElement.msRequestFullscreen) { // IE/Edge
+                                    videoElement.msRequestFullscreen();
+                                }
+                            }
+                        </script>
                     </div>
                 </div>
             </div>
@@ -237,7 +254,7 @@
                 <!-- Page 2 -->
                 <div class="back">
                     <div class="embed-responsive embed-responsive-16by9">
-                        <video width="398" height="400" src="assets/video/bg-page-03.mp4" autoplay loop muted playsinline loading="lazy"></video>
+                        <video class="immersion" src="assets/video/bg-page-03.mp4" autoplay loop muted playsinline loading="lazy"></video>
                         <div class="overlay-title">
                             <div class="circle-number">1</div>
                             Immersion
@@ -258,7 +275,7 @@
             <div class="page">
                 <div class="front">
                     <div class="embed-responsive embed-responsive-16by9">
-                        <video width="398" height="400" src="assets/video/bg-page-04.mp4" autoplay loop muted playsinline loading="lazy"></video>
+                        <video class="immersion" src="assets/video/bg-page-04.mp4" autoplay loop muted playsinline loading="lazy"></video>
                         <div class="overlay-title">
                             <div class="circle-number">2</div>
                             Immersion

@@ -367,6 +367,17 @@ video {
     transition: transform 0.5s ease-in-out;
 }
 
+.immersion {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    z-index: 1;
+    background-color: #0008;
+    border-radius: 0.3125rem;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
+    transition: transform 0.5s ease-in-out;
+}
+
 /* ====================== */
 /* TEXT OVERLAYS         */
 /* ====================== */

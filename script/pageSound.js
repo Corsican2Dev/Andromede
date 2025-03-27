@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const pageSounds = {
         // Pages 2 (index 1)
         "1_front": "./assets/audio/page2.mp3",
+        "1_back": "./assets/audio/page1.mp3",
 
         // Pages 3-4 (index 2)
         "2_back": "./assets/audio/page3.mp3",
