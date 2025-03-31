@@ -63,6 +63,10 @@ class FlipBook {
         this.isPageTurnSoundMuted = !this.isPageTurnSoundMuted;
     }
 
+    // Nouvelle méthode pour obtenir le statut du son
+    getPageTurnSoundStatus() {
+        return this.isPageTurnSoundMuted ? 'off' : 'on';
+    }
 }
 // Path: FlipBook_interactif/script/index.js
 // Classe BackgroundManager pour gérer les arrière-plans et les audios
@@ -73,7 +77,29 @@ class BackgroundManager {
                 image: "./assets/img/default_background.png", // Vérifiez ce chemin
                 audio: "./assets/audio/ambiance.mp3",
                 explanationImage: "./assets/img/person_explaining.png",
-                explanationAudio: "./assets/audio/ambiance_explanation.mp3"
+                explanationAudio: "./assets/audio/ambiance_explanation.mp3",
+                hotspots: [
+                    {
+                        id: 'hotspot1',
+                        x: 38.4, // % from left
+                        y: 39.95, // % from top
+                        width: 4, // % of container width
+                        height: 8, // % of container height
+                        action: 'openModal',
+                        target: 'videoModal',
+                        tooltip: 'Carte galactique'
+                    },
+                    {
+                        id: 'hotspot2',
+                        x: 55.5,
+                        y: 38,
+                        width: 3,
+                        height: 6,
+                        action: 'openPhotoGallery',
+                        target: './vue/photoGallery.html',
+                        tooltip: 'Galerie photo'
+                    }
+                ]
             },
             forest: {
                 image: "./assets/img/background_forest_clearing.png", // Vérifiez ce chemin
@@ -94,13 +120,23 @@ class BackgroundManager {
         };
         this.currentAudio = null;
         this.explanationAudio = null;
+        this.activeHotspots = [];
+        this.hotspotsContainer = null;
     }
 
     setBackgroundAndAudio(bgKey, playExplanationAudio = false) {
         if (this.backgrounds[bgKey]) {
-            const { image, audio, explanationImage, explanationAudio: explanationAudioSrc } = this.backgrounds[bgKey];
+            const { image, audio, explanationImage, explanationAudio: explanationAudioSrc, hotspots } = this.backgrounds[bgKey];
             console.log(`Setting background image to: ${image}`); // Debug message
             document.body.style.backgroundImage = `url(${image})`;
+
+            // Remove existing hotspots
+            this.clearHotspots();
+            
+            // Add new hotspots if available
+            if (hotspots && hotspots.length > 0) {
+                this.addHotspots(hotspots);
+            }
 
             if (this.currentAudio) {
                 this.currentAudio.pause();
@@ -153,8 +189,110 @@ class BackgroundManager {
             console.log(`No background found for key: ${bgKey}`); // Debug message
         }
     }
-}
 
+    // Nouvelle méthode pour ajouter les hotspots sur le background
+    addHotspots(hotspots) {
+        // Créer un conteneur pour les hotspots s'il n'existe pas déjà
+        if (!this.hotspotsContainer) {
+            this.hotspotsContainer = document.createElement('div');
+            this.hotspotsContainer.className = 'background-map-container';
+            document.body.appendChild(this.hotspotsContainer);
+        }
+
+        hotspots.forEach(hotspot => {
+            const hotspotElement = document.createElement('div');
+            hotspotElement.id = hotspot.id;
+            hotspotElement.className = 'map-hotspot';
+            hotspotElement.setAttribute('data-action', hotspot.action);
+            hotspotElement.setAttribute('data-target', hotspot.target || '');
+            hotspotElement.setAttribute('data-audio-src', hotspot.audioSrc || '');
+            hotspotElement.style.left = `${hotspot.x}%`;
+            hotspotElement.style.top = `${hotspot.y}%`;
+            hotspotElement.style.width = `${hotspot.width}%`;
+            hotspotElement.style.height = `${hotspot.height}%`;
+            
+            // Ajouter un tooltip Bootstrap si défini
+            if (hotspot.tooltip) {
+                hotspotElement.setAttribute('data-bs-toggle', 'tooltip');
+                hotspotElement.setAttribute('data-bs-placement', 'top');
+                hotspotElement.setAttribute('title', hotspot.tooltip);
+            }
+            
+            // Gérer les actions au clic
+            hotspotElement.addEventListener('click', () => this.handleHotspotClick(hotspot));
+            
+            this.hotspotsContainer.appendChild(hotspotElement);
+            this.activeHotspots.push(hotspotElement);
+        });
+        
+        // Réinitialiser les tooltips
+        const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        tooltipTriggerList.forEach(tooltipTriggerEl => {
+            new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    }
+    
+    // Méthode pour nettoyer les hotspots existants
+    clearHotspots() {
+        if (this.hotspotsContainer) {
+            // Supprimer tous les tooltips Bootstrap associés
+            this.activeHotspots.forEach(hotspot => {
+                const tooltip = bootstrap.Tooltip.getInstance(hotspot);
+                if (tooltip) {
+                    tooltip.dispose();
+                }
+            });
+            
+            // Vider le conteneur
+            this.hotspotsContainer.innerHTML = '';
+            this.activeHotspots = [];
+        }
+    }
+    
+    // Gérer les actions des hotspots
+    handleHotspotClick(hotspot) {
+        console.log(`Hotspot ${hotspot.id} clicked with action: ${hotspot.action}`);
+        
+        switch (hotspot.action) {
+            case 'openModal':
+                if (hotspot.target) {
+                    const modal = new bootstrap.Modal(document.getElementById(hotspot.target));
+                    modal.show();
+                }
+                break;
+                
+            case 'playAudio':
+                if (hotspot.audioSrc) {
+                    const audio = new Audio(hotspot.audioSrc);
+                    audio.volume = document.getElementById('volumeControl').value;
+                    audio.play();
+                }
+                break;
+                
+            case 'navigateToPage':
+                if (hotspot.pageNumber && window.flipBookInstance) {
+                    // Naviguer vers une page spécifique
+                    const pageIndex = parseInt(hotspot.pageNumber);
+                    const book = document.querySelector('.book');
+                    book.style.setProperty("--c", pageIndex);
+                }
+                break;
+                
+            case 'openPhotoGallery':
+                if (hotspot.target) {
+                    // Ouvrir la page de la galerie photo dans une nouvelle fenêtre/onglet
+                    window.open(hotspot.target, '_blank');
+                } else {
+                    // URL par défaut si non spécifiée
+                    window.open('vue/photoGallery.html', '_blank');
+                }
+                break;
+                
+            default:
+                console.log(`Action ${hotspot.action} non implémentée`);
+        }
+    }
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll(".book").forEach(elBook => new FlipBook(elBook));
